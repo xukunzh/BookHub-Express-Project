@@ -6,16 +6,17 @@
   <div class="form-item">
     <label>Author</label>
     <select name="author">
-    <% authors.forEach(author => { %>
-      <% if (author.id === book.author) { %>
-        <option selected label="<%= author.name %>" value="<%= author.id %>">
-      <% } else { %>
-        <option label="<%= author.name %>" value="<%= author.id %>">
-      <% } %>
-    <% }) %>
+      <% authors.forEach(author => { %>
+        <% if (author.id === book.author) { %>
+          <option selected label="<%= author.name %>" value="<%= author.id %>">
+        <% } else { %>
+          <option label="<%= author.name %>" value="<%= author.id %>">
+        <% } %>
+      <% }) %>
     </select>
   </div>
 </div>
+
 <div class="form-row">
   <div class="form-item">
     <label>Publish Date</label>
@@ -27,10 +28,11 @@
     <input type="number" name="pageCount" min="1" value="<%= book.pageCount %>">
   </div>
 </div>
+
 <div class="form-row">
   <div class="form-item form-item-no-grow">
     <label>Cover</label>
-    <input type="file" name="cover" class="filepond">
+    <input type="file" name="cover" class="book-cover filepond">
   </div>
   <div class="form-item">
     <label>Description</label>
