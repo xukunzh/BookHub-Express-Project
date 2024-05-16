@@ -52,6 +52,50 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.get('/:id', async (req, res) => {
+  let book
+  try {
+    const book = await Book.findById(req.params.id)
+    book.author = await Author.findById(book.author)
+    res.render('books/show', {
+      book: book
+    })
+  } catch {
+    res.redirect('/')
+  }
+})
+
+router.get('/:id/edit', async (req, res) => {
+  let book
+  try {
+    const book = await Book.findById(req.params.id)
+    const authors = await Author.find({})
+    res.render('books/edit', {
+      book: book,
+      authors: authors
+    })
+  } catch {
+    res.redirect('/books/${book.id}')
+  }
+})
+
+router.put('/:id', async (req, res) => {
+  try {
+    book = await Book.findById(req.params.id)
+    book.title = req.body.title
+    book.author = req.body.author
+    book.publishDate = new Date(req.body.publishDate)
+    book.pageCount = req.body.pageCount
+    book.description = req.body.description
+    if (req.body.cover != null && req.body.cover !== '') {
+      saveCover(book, req.body.cover)}
+    await book.save()
+    res.redirect(`/books/${book.id}`)
+  } catch {
+    res.redirect(`/books`)
+  }
+})
+
 // Delete Book Page
 router.delete('/:id', async (req, res) => {
   let book

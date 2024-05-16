@@ -29,5 +29,14 @@ db.once('open', () => console.log('Connected to Mongoose'))
 app.use('/', indexRouter)
 app.use('/authors', authorRouter)
 app.use('/books', bookRouter)
- 
+
+app.use((err, req, res, next) => {
+    if (err instanceof URIError) {
+      // 处理 URIError
+      res.status(400).send('Invalid URI');
+    } else {
+      next(err);
+    }
+  });
+  
 app.listen(process.env.PORT || 3000)
