@@ -1,4 +1,4 @@
-# Book Management System
+# Book Management System - BookHub
 
 A simple Node.js + Express.js tutorial project demonstrating CRUD operations with books and authors.
 
